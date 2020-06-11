@@ -25,6 +25,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.11.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -63,19 +64,20 @@
                 <configuration>
                     <instructions>
                         <Fragment-Host>org.ops4j.pax.logging.pax-logging-log4j2</Fragment-Host>
+                        <Export-Package>!*</Export-Package>
                         <Import-Package>
+                            org.osgi.framework;version="[1.8,2.0)",
                             org.apache.logging.log4j*;version="[2,3)";resolution:=optional,
                             *
                         </Import-Package>
                         <Private-Package>
-                            com.rollbar*
+                            com.rollbar*,
+                            com.rollbar.log4j2*
                         </Private-Package>
-                        <!--
                         <Include-Resource>
                             {maven-resources},
                             META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat=target/classes/META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat
                         </Include-Resource>
-                        -->
                     </instructions>
                 </configuration>
             </plugin>
